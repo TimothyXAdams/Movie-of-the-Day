@@ -101,6 +101,8 @@ def add_movie():
 
     # TODO
     # if the user wants to add a terrible movie, redirect and tell them not to add it b/c it sucks
+    if new_movie == 'Christmas With The Cranks':
+        return redirect('/horrible-movie')
 
     # build response content
     new_movie_element = "<strong>" + new_movie + "</strong>"
@@ -113,6 +115,11 @@ def add_movie():
 @app.route('/no-content')
 def no_content():
     return 'Please enter a movie title.'
+
+
+@app.route('/horrible-movie')
+def horrible_movie():
+    return 'This is the worst movie ever made. The Internet will not allow it.'
 
 
 @app.route("/")
