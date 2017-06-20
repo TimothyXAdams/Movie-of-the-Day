@@ -1,5 +1,5 @@
 from flask import Flask, request, redirect
-import cgi, html
+import cgi
 
 app = Flask(__name__)
 
@@ -91,9 +91,15 @@ def add_movie():
     new_movie = request.form['new-movie']
 
     # TODO
+    # Unfortunately, this prevents characters like & <> etc
     # 'escape' the user's input so that if they typed HTML, it doesn't mess up our site
+    temp = new_movie
     new_movie = cgi.escape(new_movie)
-    new_movie = html.escape(new_movie)
+
+    if new_movie != temp: #If new_movie had to be HTML-escaped
+        error = 'Don\'t be a smart-alek.'
+        return redirect("/?error=" + error)
+
 
     # TODO
     # if the user typed nothing at all, redirect and tell them the error
@@ -113,7 +119,8 @@ def add_movie():
 
     return content
 
-
+'''
+#These ended up being unnecsary:
 @app.route('/no-content')
 def no_content():
     return 'Please enter a movie title.'
@@ -122,7 +129,7 @@ def no_content():
 @app.route('/horrible-movie')
 def horrible_movie():
     return 'This is the worst movie ever made. The Internet will not allow it.'
-
+'''
 
 @app.route("/")
 def index():
