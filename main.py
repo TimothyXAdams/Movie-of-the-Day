@@ -1,5 +1,5 @@
 from flask import Flask, request, redirect
-import cgi
+import cgi, html
 
 app = Flask(__name__)
 
@@ -89,13 +89,17 @@ def crossoff_movie():
 def add_movie():
     new_movie = request.form['new-movie']
 
-    # TODO 
+    # TODO
     # 'escape' the user's input so that if they typed HTML, it doesn't mess up our site
-    
-    # TODO 
-    # if the user typed nothing at all, redirect and tell them the error
+    new_movie = cgi.escape(new_movie)
+    new_movie = html.escape(new_movie)
 
-    # TODO 
+    # TODO
+    # if the user typed nothing at all, redirect and tell them the error
+    if new_movie = '':
+        return redirect('/no-content')
+
+    # TODO
     # if the user wants to add a terrible movie, redirect and tell them not to add it b/c it sucks
 
     # build response content
@@ -104,6 +108,11 @@ def add_movie():
     content = page_header + "<p>" + sentence + "</p>" + page_footer
 
     return content
+
+
+@app.route('/no-content')
+def no_content():
+    return 'Please enter a movie title.'
 
 
 @app.route("/")
