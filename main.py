@@ -62,6 +62,7 @@ terrible_movies = [
     "Paul Blart: Mall Cop 2",
     "Nine Lives",
     "Starship Troopers"
+    "Christmas With the Cranks"
 ]
 
 
@@ -97,12 +98,13 @@ def add_movie():
     # TODO
     # if the user typed nothing at all, redirect and tell them the error
     if new_movie == '':
-        return redirect('/no-content')
-
+        error = 'Please enter a movie title.'
+        return redirect("/?error=" + error)
     # TODO
     # if the user wants to add a terrible movie, redirect and tell them not to add it b/c it sucks
-    if new_movie == 'Christmas With The Cranks':
-        return redirect('/horrible-movie')
+    if new_movie in terrible_movies:
+        error = 'This is the worst movie ever made. The Internet will not allow it.'
+        return redirect("/?error=" + error)
 
     # build response content
     new_movie_element = "<strong>" + new_movie + "</strong>"
