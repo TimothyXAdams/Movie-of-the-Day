@@ -96,7 +96,7 @@ def add_movie():
 
     # TODO
     # if the user typed nothing at all, redirect and tell them the error
-    if new_movie = '':
+    if new_movie == '':
         return redirect('/no-content')
 
     # TODO
