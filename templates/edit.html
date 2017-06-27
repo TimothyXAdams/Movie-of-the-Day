@@ -2,12 +2,16 @@
 
 {% block content %}
 
+
+{% if watchlist != []: %}  # If Watchlist is NOT empty
 <h2>My Watchlist</h2>
     <ul>
         {% for movie in watchlist: %}
             <li>{{ movie }}</li>
         {% endfor %}
     </ul>
+{% endif %}
+
 
 <h2>Edit My Watchlist</h2>
 
@@ -20,6 +24,8 @@
     <input type="submit" value="Add It"/>
 </form>
 
+
+{% if watchlist != []: %}  # If Watchlist is NOT empty
 <form action="/crossoff" method="post">
     <label>
         I want to cross off
@@ -33,6 +39,8 @@
     </label>
     <input type="submit" value="Cross It Off"/>
 </form>
+{% endif %}
+
 
 {% if error %}
   <p class='error'>{{ error }}</p>
